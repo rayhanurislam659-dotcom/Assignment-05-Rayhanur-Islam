@@ -1,3 +1,8 @@
+const menuBtn = document.getElementById("menuBtn");
+const navInner = document.querySelector(".nav-inner");
+menuBtn.addEventListener("click", function () {
+    navInner.classList.toggle("menu-open");
+});
 const technologies = [
     {
         name: "React",

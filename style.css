@@ -29,11 +29,6 @@ button {
     margin: 0 auto;
 }
 
-
-/* =========================
-   NAVBAR
-========================= */
-
 .navbar {
     height: 70px;
     border-bottom: 1px solid #edf0f5;
@@ -52,9 +47,6 @@ button {
     justify-content: space-between;
 }
 
-
-/* Logo */
-
 .logo {
     display: flex;
     align-items: center;
@@ -63,7 +55,6 @@ button {
     font-size: 18px;
     font-weight: 700;
 }
-
 .logo b {
     color: #d82b86;
 }
@@ -71,26 +62,18 @@ button {
 .logo-box {
     width: 27px;
     height: 27px;
-
     border-radius: 7px;
-
     display: grid;
     place-items: center;
-
     color: white;
-
     font-size: 10px;
     font-weight: 800;
-
     background: linear-gradient(
         135deg,
         #a83ed2,
         #e52883
     );
 }
-
-
-/* Navigation */
 
 .nav-links {
     display: flex;
@@ -141,9 +124,6 @@ button {
     font-weight: 600;
 }
 
-
-/* Mobile menu */
-
 .menu-btn {
     display: none;
 
@@ -152,11 +132,6 @@ button {
 
     font-size: 24px;
 }
-
-
-/* =========================
-   HERO
-========================= */
 
 .hero {
     padding: 100px 0 105px;
@@ -210,9 +185,6 @@ button {
 
     margin-bottom: 31px;
 }
-
-
-/* Hero buttons */
 
 .hero-buttons {
     display: flex;
@@ -292,10 +264,6 @@ button {
         0 0 10px #00eaff;
 }
 
-/* =========================
-   TECHNOLOGIES
-========================= */
-
 .technologies-section {
     padding: 15px 0 90px;
 }
@@ -328,8 +296,6 @@ button {
 }
 
 
-/* Layout */
-
 .technology-layout {
     display: grid;
 
@@ -342,9 +308,6 @@ button {
     align-items: start;
 }
 
-
-/* Cards grid */
-
 .tech-grid {
     display: grid;
 
@@ -353,9 +316,6 @@ button {
 
     gap: 18px;
 }
-
-
-/* Card */
 
 .tech-card {
     min-height: 250px;
@@ -390,9 +350,6 @@ button {
         0 12px 28px rgba(20, 32, 55, 0.08);
 }
 
-
-/* Card top */
-
 .card-top {
     min-height: 30px;
 
@@ -402,9 +359,6 @@ button {
 
     justify-content: space-between;
 }
-
-
-/* Technology icons */
 
 .tech-icon {
     width: 29px;
@@ -474,9 +428,6 @@ button {
     color: #159ddd;
 }
 
-
-/* Badge */
-
 .badge {
     padding: 4px 9px;
 
@@ -489,9 +440,6 @@ button {
 
     background: #effaff;
 }
-
-
-/* Card text */
 
 .tech-card h3 {
     margin: 15px 0 8px;
@@ -508,9 +456,6 @@ button {
 
     min-height: 52px;
 }
-
-
-/* Card info */
 
 .card-info {
     margin-top: auto;
@@ -548,9 +493,6 @@ button {
     white-space: nowrap;
 }
 
-
-/* Add button */
-
 .add-btn {
     margin-top: 11px;
 
@@ -580,11 +522,6 @@ button {
 
     opacity: 0.45;
 }
-
-
-/* =========================
-   YOUR STACK
-========================= */
 
 .stack-panel {
     border: 1px solid #e7ebf1;
@@ -630,9 +567,6 @@ button {
     text-align: center;
 }
 
-
-/* Stack item */
-
 .stack-item {
     height: 39px;
 
@@ -676,9 +610,6 @@ button {
     color: #e32976;
 }
 
-
-/* Remove all */
-
 .remove-all {
     width: 100%;
 
@@ -703,11 +634,6 @@ button {
     background: #fff6f6;
 }
 
-
-/* =========================
-   EXTRA SECTIONS
-========================= */
-
 .simple-section {
     padding: 75px 0;
 
@@ -717,11 +643,6 @@ button {
 .simple-section p {
     font-size: 14px;
 }
-
-
-/* =========================
-   FOOTER
-========================= */
 
 footer {
     border-top: 1px solid #e8ecf1;
@@ -785,10 +706,6 @@ footer {
 
     font-size: 10px;
 }
-
-
-/* Footer bottom */
-
 .footer-bottom {
     border-top: 1px solid #e8ecf1;
 
@@ -810,11 +727,6 @@ footer {
 
     gap: 20px;
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1000px) {
 
@@ -849,38 +761,24 @@ footer {
     .auth {
         display: none;
     }
-
     .menu-btn {
         display: block;
     }
-
     .nav-inner.menu-open .nav-links {
         display: flex;
-
         position: absolute;
-
         left: 20px;
         right: 20px;
-
-        top: 70px;
-
+        top: 62px;
         margin: 0;
-
         padding: 20px;
-
         flex-direction: column;
-
         background: white;
-
         border: 1px solid #e5e9ef;
-
         border-radius: 10px;
-
         box-shadow:
             0 15px 30px rgba(0, 0, 0, 0.08);
     }
-
-
     .hero {
         padding: 60px 0 55px;
     }
