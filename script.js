@@ -133,20 +133,11 @@ const removeAll = document.getElementById("removeAll");
 
 let selectedStack = [];
 
-// ===============================
-// Render Technology Cards
-// ===============================
-
 function renderTechnologies() {
-
     techGrid.innerHTML = "";
-
     technologies.forEach((tech) => {
-
         const card = document.createElement("article");
-
         card.className = "tech-card";
-
         const isSelected = selectedStack.some(
             item => item.name === tech.name
         );
@@ -157,13 +148,11 @@ function renderTechnologies() {
                 <div class="tech-icon ${tech.iconClass}">
                     ${tech.icon}
                 </div>
-
                 ${
                     tech.badge
                         ? `<span class="badge">${tech.badge}</span>`
                         : ""
                 }
-
             </div>
 
             <h3>${tech.name}</h3>
@@ -189,10 +178,6 @@ function renderTechnologies() {
     });
 }
 
-
-// ===============================
-// Add Technology
-// ===============================
 function addToStack(name) {
 
     const tech = technologies.find(
@@ -212,10 +197,6 @@ function addToStack(name) {
     renderTechnologies();
     renderStack();
 }
-
-// ===============================
-// Render Your Stack
-// ===============================
 
 function renderStack() {
 
@@ -267,11 +248,6 @@ function renderStack() {
     });
 }
 
-
-// ===============================
-// Add Button Click
-// ===============================
-
 techGrid.addEventListener("click", function(event) {
 
     if (event.target.classList.contains("add-btn")) {
@@ -282,11 +258,6 @@ techGrid.addEventListener("click", function(event) {
     }
 
 });
-
-
-// ===============================
-// Remove Button Click
-// ===============================
 
 stackList.addEventListener("click", function(event) {
 
@@ -304,11 +275,6 @@ stackList.addEventListener("click", function(event) {
 
 });
 
-
-// ===============================
-// Remove All
-// ===============================
-
 removeAll.addEventListener("click", function() {
 
     if (selectedStack.length === 0) return;
@@ -318,17 +284,9 @@ removeAll.addEventListener("click", function() {
     );
 
     if (!confirmRemove) return;
-
     selectedStack = [];
-
     renderTechnologies();
     renderStack();
 });
-
-
-// ===============================
-// Initial Render
-// ===============================
-
 renderTechnologies();
 renderStack();
