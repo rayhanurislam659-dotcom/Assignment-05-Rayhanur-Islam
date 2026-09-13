@@ -6,15 +6,15 @@
 
 ### 2. What is the difference between props and state?
 
-= Props are used to pass data from parent to child. State stores data that can change inside a component.
+= Props are used to pass data from a parent component to a child component. State stores data that can change inside a component.
 
 ### 3. What does the `useState` hook do, and where did you use it in this project?
 
-= `useState` is used to manage changing data in a React component. It can be used to store the selected technologies in the stack.
+= `useState` is used to manage changing data in a React component. In this project, it could be used to store the selected technologies in the stack.
 
 ### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
 
-= `useEffect` handles side effects in React. It can be used to fetch and load the technology data from the JSON file when the page loads.
+= `useEffect` is used to handle side effects in React. It can be used to fetch and load the technology data from the JSON file when the page loads.
 
 ### 5. Why does every item in a `.map()` list need a unique `key` prop?
 
@@ -22,7 +22,7 @@
 
 ### 6. What is conditional rendering? Show one place you used it.
 
-= Conditional rendering means showing different UI based on a condition. For example, showing the empty stack message when no technology is selected.
+= Conditional rendering means showing different UI based on a condition. For example, showing an empty stack message when no technology is selected.
 
 ### 7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?
 
