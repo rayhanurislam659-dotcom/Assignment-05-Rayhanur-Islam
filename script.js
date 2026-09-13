@@ -1,158 +1,103 @@
-const menuBtn = document.getElementById("menuBtn");
-const navInner = document.querySelector(".nav-inner");
-menuBtn.addEventListener("click", function () {
-    navInner.classList.toggle("menu-open");
-});
-const technologies = [
-    {
-        name: "React",
-        icon: "⚛",
-        iconClass: "icon-react",
-        badge: "Popular",
-        category: "Frontend",
-        level: "Beginner-Friendly",
-        rating: "4.9",
-        description: "A declarative, component-based JavaScript library for building modern user interfaces."
-    },
-    {
-        name: "Vue.js",
-        icon: "V",
-        iconClass: "icon-vue",
-        badge: "Versatile",
-        category: "Frontend",
-        level: "Beginner-Friendly",
-        rating: "4.8",
-        description: "An approachable, performant, and versatile framework for building web user interfaces."
-    },
-    {
-        name: "Svelte",
-        icon: "S",
-        iconClass: "icon-svelte",
-        badge: "Fast",
-        category: "Frontend",
-        level: "Intermediate",
-        rating: "4.8",
-        description: "Cybernetically enhanced web apps with compile-time reactivity."
-    },
-    {
-        name: "Next.js",
-        icon: "N",
-        iconClass: "icon-next",
-        badge: "",
-        category: "Frontend",
-        level: "Intermediate",
-        rating: "4.9",
-        description: "The React framework for full-stack web applications."
-    },
-    {
-        name: "Node.js",
-        icon: "JS",
-        iconClass: "icon-node",
-        badge: "Standard",
-        category: "Backend",
-        level: "Intermediate",
-        rating: "4.8",
-        description: "An asynchronous event-driven JavaScript runtime."
-    },
-    {
-        name: "PostgreSQL",
-        icon: "PG",
-        iconClass: "icon-postgres",
-        badge: "Top SQL",
-        category: "Database",
-        level: "Intermediate",
-        rating: "4.9",
-        description: "A powerful, open-source object-relational database system."
-    },
-    {
-        name: "Redis",
-        icon: "R",
-        iconClass: "icon-redis",
-        badge: "Cache",
-        category: "Database",
-        level: "Intermediate",
-        rating: "4.8",
-        description: "In-memory data structure store used as a high-speed database and cache."
-    },
-    {
-        name: "JavaScript",
-        icon: "JS",
-        iconClass: "icon-js",
-        badge: "Ubiquitous",
-        category: "Language",
-        level: "Beginner-Friendly",
-        rating: "4.9",
-        description: "The versatile scripting language powering dynamic behavior across the web."
-    },
-    {
-        name: "TypeScript",
-        icon: "TS",
-        iconClass: "icon-ts",
-        badge: "Essential",
-        category: "Language",
-        level: "Intermediate",
-        rating: "4.9",
-        description: "A strongly typed programming language that builds on JavaScript."
-    },
-    {
-        name: "Java",
-        icon: "☕",
-        iconClass: "icon-java",
-        badge: "Robust",
-        category: "Language",
-        level: "Intermediate",
-        rating: "4.6",
-        description: "A secure, object-oriented programming language."
-    },
-    {
-        name: "Tailwind CSS",
-        icon: "≈",
-        iconClass: "icon-tailwind",
-        badge: "Modern",
-        category: "Styling",
-        level: "Beginner-Friendly",
-        rating: "4.9",
-        description: "A utility-first CSS framework for building custom UI."
-    },
-    {
-        name: "Docker",
-        icon: "D",
-        iconClass: "icon-docker",
-        badge: "Containers",
-        category: "Tooling",
-        level: "Intermediate",
-        rating: "4.9",
-        description: "A platform designed to build, share, and run containerized applications."
-    }
-];
-
 const techGrid = document.getElementById("techGrid");
 const stackList = document.getElementById("stackList");
 const selectedCount = document.getElementById("selectedCount");
 const removeAll = document.getElementById("removeAll");
 
+const menuBtn = document.getElementById("menuBtn");
+const navInner = document.querySelector(".nav-inner");
+
+let technologies = [];
 let selectedStack = [];
 
+function showToast(message, type = "success") {
+
+    const toast = document.createElement("div");
+
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+
+    }, 2500);
+}
+
+async function loadTechnologies() {
+
+    techGrid.innerHTML = `
+        <div class="loading">
+            <div class="loader"></div>
+            <p>Loading technologies...</p>
+        </div>
+    `;
+
+    try {
+
+        const response = await fetch("./data/technologies.json");
+
+        if (!response.ok) {
+            throw new Error("Could not load technology data.");
+        }
+
+        technologies = await response.json();
+
+        renderTechnologies();
+
+    } catch (error) {
+
+        console.error(error);
+
+        techGrid.innerHTML = `
+            <div class="loading error">
+                <p>Failed to load technologies.</p>
+                <small>Please make sure the JSON file exists.</small>
+            </div>
+        `;
+    }
+}
+
+
 function renderTechnologies() {
+
     techGrid.innerHTML = "";
+
     technologies.forEach((tech) => {
+
         const card = document.createElement("article");
+
         card.className = "tech-card";
+
         const isSelected = selectedStack.some(
-            item => item.name === tech.name
+            item => item.id === tech.id
         );
 
         card.innerHTML = `
             <div class="card-top">
 
-                <div class="tech-icon ${tech.iconClass}">
-                    ${tech.icon}
+                <div class="tech-icon">
+                    <img
+                        src="${tech.icon}"
+                        alt="${tech.name} icon"
+                    >
                 </div>
+
                 ${
                     tech.badge
                         ? `<span class="badge">${tech.badge}</span>`
                         : ""
                 }
+
             </div>
 
             <h3>${tech.name}</h3>
@@ -160,17 +105,27 @@ function renderTechnologies() {
             <p>${tech.description}</p>
 
             <div class="card-info">
+
                 <span>${tech.category}</span>
-                <span>${tech.level}</span>
-                <span class="rating">★ ${tech.rating}</span>
+
+                <span>${tech.difficulty}</span>
+
+                <span class="rating">
+                    ★ ${tech.rating}
+                </span>
+
             </div>
 
             <button
                 class="add-btn"
-                data-name="${tech.name}"
+                data-id="${tech.id}"
                 ${isSelected ? "disabled" : ""}
             >
-                ${isSelected ? "Added to Stack" : "Add to Stack"}
+                ${
+                    isSelected
+                        ? "✓ Added to Stack"
+                        : "Add to Stack"
+                }
             </button>
         `;
 
@@ -178,29 +133,48 @@ function renderTechnologies() {
     });
 }
 
-function addToStack(name) {
+
+function addToStack(id) {
 
     const tech = technologies.find(
-        item => item.name === name
+        item => item.id === id
     );
 
     if (!tech) return;
 
+
+
     const alreadyAdded = selectedStack.some(
-        item => item.name === tech.name
+        item => item.id === id
     );
 
-    if (alreadyAdded) return;
+    if (alreadyAdded) {
+
+        showToast(
+            `${tech.name} is already in your stack.`,
+            "warning"
+        );
+
+        return;
+    }
+
 
     selectedStack.push(tech);
 
     renderTechnologies();
     renderStack();
+
+    showToast(
+        `${tech.name} added to your stack.`,
+        "success"
+    );
 }
+
 
 function renderStack() {
 
     selectedCount.textContent = selectedStack.length;
+
 
     if (selectedStack.length === 0) {
 
@@ -213,7 +187,9 @@ function renderStack() {
         return;
     }
 
+
     stackList.innerHTML = "";
+
 
     selectedStack.forEach((tech) => {
 
@@ -222,71 +198,127 @@ function renderStack() {
         item.className = "stack-item";
 
         item.innerHTML = `
-         <div class="stack-tech">
+            <div class="stack-tech">
 
-        <div class="tech-icon ${tech.iconClass}">
-            ${tech.icon}
-        </div>
+                <div class="tech-icon">
 
-        <div>
-            <strong>${tech.name}</strong>
-            <small>${tech.category}</small>
-        </div>
+                    <img
+                        src="${tech.icon}"
+                        alt="${tech.name} icon"
+                    >
 
-    </div>
+                </div>
 
-    <button
-        class="stack-remove"
-        data-name="${tech.name}"
-        title="Remove"
-    >
-        &times;
-    </button>
-`;
+                <div>
+
+                    <strong>${tech.name}</strong>
+
+                    <small>${tech.category}</small>
+
+                </div>
+
+            </div>
+
+            <button
+                class="stack-remove"
+                data-id="${tech.id}"
+                title="Remove ${tech.name}"
+            >
+                &times;
+            </button>
+        `;
 
         stackList.appendChild(item);
     });
 }
 
-techGrid.addEventListener("click", function(event) {
 
-    if (event.target.classList.contains("add-btn")) {
+techGrid.addEventListener("click", function (event) {
 
-        const name = event.target.dataset.name;
+    const addButton = event.target.closest(".add-btn");
 
-        addToStack(name);
-    }
+    if (!addButton) return;
 
+    const id = addButton.dataset.id;
+
+    addToStack(id);
 });
 
-stackList.addEventListener("click", function(event) {
 
-    if (event.target.classList.contains("stack-remove")) {
+stackList.addEventListener("click", function (event) {
 
-        const name = event.target.dataset.name;
+    const removeButton =
+        event.target.closest(".stack-remove");
 
-        selectedStack = selectedStack.filter(
-            tech => tech.name !== name
-        );
+    if (!removeButton) return;
 
-        renderTechnologies();
-        renderStack();
-    }
+    const id = removeButton.dataset.id;
 
-});
 
-removeAll.addEventListener("click", function() {
-
-    if (selectedStack.length === 0) return;
-
-    const confirmRemove = confirm(
-        "Remove all selected technologies?"
+    const removedTech = selectedStack.find(
+        tech => tech.id === id
     );
 
-    if (!confirmRemove) return;
-    selectedStack = [];
+
+    selectedStack = selectedStack.filter(
+        tech => tech.id !== id
+    );
+
+
     renderTechnologies();
     renderStack();
+
+
+    if (removedTech) {
+
+        showToast(
+            `${removedTech.name} removed from your stack.`,
+            "warning"
+        );
+    }
 });
-renderTechnologies();
+
+
+removeAll.addEventListener("click", function () {
+
+    if (selectedStack.length === 0) {
+
+        showToast(
+            "Your stack is already empty.",
+            "warning"
+        );
+
+        return;
+    }
+
+
+    selectedStack = [];
+
+    renderTechnologies();
+    renderStack();
+
+
+    showToast(
+        "All technologies removed.",
+        "warning"
+    );
+});
+
+menuBtn.addEventListener("click", function () {
+
+    navInner.classList.toggle("menu-open");
+
+});
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach((link) => {
+
+        link.addEventListener("click", function () {
+
+            navInner.classList.remove("menu-open");
+
+        });
+    });
 renderStack();
+loadTechnologies();
