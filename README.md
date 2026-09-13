@@ -1,31 +1,29 @@
-## ❓ Frequently Asked Questions (FAQ)
+## React Questions & Answers
 
-### 1. Where can we deploy the site?
-= I can deploy this website for free on several modern hosting platforms:
-- **Vercel:** Recommended for React/modern frontend frameworks (Instant setup with GitHub).
-- **Netlify:** Great for static websites and simple React applications.
-- **GitHub Pages:** Easy deployment directly from your GitHub repository.
-- **Render:** Another reliable free hosting service for static sites.
+### 1. What is JSX, and why is it used in React?
 
----
+= JSX is a syntax that lets us write HTML-like code inside JavaScript. It makes React UI code easier to read and write.
 
-### 2. Do we have to use TypeScript?
-= No, TypeScript is optional.** I can build and maintain this project entirely using standard JavaScript. 
+### 2. What is the difference between props and state?
 
----
+= Props are used to pass data from parent to child. State stores data that can change inside a component.
 
-### 3. Can we change the title, logo, and colors?
-= Yes, absolutely!** 
-- **Title & Favicon:** Update the `<title>` and `<link rel="icon">` tags inside the `index.html` file.
-- **Colors:** Modify the global CSS variables inside your stylesheet to match your preferred theme.
-- **Logo:** Replace the logo image/SVG asset in the `assets` folder or update the header component with your custom image.
+### 3. What does the `useState` hook do, and where did you use it in this project?
 
----
+= `useState` is used to manage changing data in a React component. It can be used to store the selected technologies in the stack.
 
-### 4. Where do we get the technology logos/icons?
-= I can source high-quality SVG/PNG icons for different technologies from the following free platforms:
-- **[Devicon]:** Specifically made for tech stack icons and programming languages.
-- **[Simple Icons]:** Over 3,000 free SVG icons for popular brands and tech.
-- **[React Icons]:** Include popular icon libraries like FontAwesome, Material Icons, and Remix Icons directly into your components.
+### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
 
----
+= `useEffect` handles side effects in React. It can be used to fetch and load the technology data from the JSON file when the page loads.
+
+### 5. Why does every item in a `.map()` list need a unique `key` prop?
+
+= A unique `key` helps React identify list items and efficiently update the UI when items change.
+
+### 6. What is conditional rendering? Show one place you used it.
+
+= Conditional rendering means showing different UI based on a condition. For example, showing the empty stack message when no technology is selected.
+
+### 7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?
+
+= A parent passes data to a child using props. The child can send data back by calling a function passed through props.
